@@ -1,9 +1,11 @@
 import './index.scss'
 
+import { Home } from '@views'
+
 const App = () => {
   return (
     <>
-      <div>App</div>
+      <Home />
     </>
   )
 }

@@ -1,5 +1,30 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@public": ["./public"],
+      "@public/*": ["./public/*"],
+      "@src": ["./src"],
+      "@src/*": ["./src/*"],
+      "@app": ["./src/app"],
+      "@app/*": ["./src/app/*"],
+      "@assets": ["./src/app/assets"],
+      "@assets/*": ["./src/app/assets/*"],
+      "@hooks": ["./src/app/hooks"],
+      "@hooks/*": ["./src/app/hooks/*"],
+      "@models": ["./src/app/models"],
+      "@models/*": ["./src/app/models/*"],
+      "@store": ["./src/app/store"],
+      "@store/*": ["./src/app/store/*"],
+      "@styles": ["./src/app/styles"],
+      "@styles/*": ["./src/app/styles/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@ui": ["./src/ui"],
+      "@ui/*": ["./src/ui/*"],
+      "@views": ["./src/views"],
+      "@views/*": ["./src/views/*"],
+    },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -22,5 +47,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "src/**/*.ts", "src/**/*.tsx"]
 }
