@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@public": ["./public"],
+      "@public/*": ["./public/*"],
+      "@src": ["./src"],
+      "@src/*": ["./src/*"],
+      "@app": ["./src/app"],
+      "@app/*": ["./src/app/*"],
+      "@assets": ["./src/app/assets"],
+      "@assets/*": ["./src/app/assets/*"],
+      "@hooks": ["./src/app/hooks"],
+      "@hooks/*": ["./src/app/hooks/*"],
+      "@models": ["./src/app/models"],
+      "@models/*": ["./src/app/models/*"],
+      "@providers": ["./src/app/providers"],
+      "@providers/*": ["./src/app/providers/*"],
+      "@store": ["./src/app/store"],
+      "@store/*": ["./src/app/store/*"],
+      "@styles": ["./src/app/styles"],
+      "@styles/*": ["./src/app/styles/*"],
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+      "@ui": ["./src/ui"],
+      "@ui/*": ["./src/ui/*"],
+      "@views": ["./src/views"],
+      "@views/*": ["./src/views/*"],
+    },
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
