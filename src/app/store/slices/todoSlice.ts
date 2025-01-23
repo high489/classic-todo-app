@@ -4,25 +4,35 @@ import { Todo } from '@models'
 
 export interface TodoSlice {
   todos: Todo[];
+  getSortedTodos: () => Todo[]; 
   addTodo: (text: string) => void;
   toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
+  deleteCompletedTodos: () => void;
 }
 
-export const createTodoSlice: StateCreator<TodoSlice> = (set) => ({
+export const createTodoSlice: StateCreator<TodoSlice> = (set, get) => ({
   todos: [],
+  getSortedTodos: () => {
+    return get().todos
+                .sort((a, b) => Number(a.id) - Number(b.id))
+                .sort((a, b) => Number(a.isCompleted) - Number(b.isCompleted))
+  },
   addTodo: (text) => {
-    set((state) => ({
-      todos: [
-        ...state.todos,
-        { id: Date.now().toString(), text, isCompleted: false },
-      ],
-    }));
+    const newTodo = { id: Date.now().toString(), text, isCompleted: false }
+    set({ todos: [...get().todos, newTodo] })
   },
-  toggleTodo: (id) => {
-    set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      ),
-    }));
-  },
+  toggleTodo: (id) => set({
+    todos: get().todos.map(todo => 
+      id === todo.id
+      ? { ...todo, isCompleted: !todo.isCompleted }
+      : todo
+    )
+  }),
+  deleteTodo: (id) => set({
+    todos: get().todos.filter(todo => todo.id !== id)
+  }),
+  deleteCompletedTodos: () => set({
+    todos: get().todos.filter(todo => !todo.isCompleted)
+  })
 })

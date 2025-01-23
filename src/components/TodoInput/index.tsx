@@ -2,7 +2,7 @@ import styles from './todo-input.module.scss'
 import { FC, useState } from 'react'
 
 import { useTodoStore } from '@store'
-import { CustomButton, CustomInput } from '@ui'
+import { ActionButton, CustomInput } from '@ui'
 
 interface TodoInputProps {}
 
@@ -23,9 +23,9 @@ const TodoInput: FC<TodoInputProps> = () => {
         <CustomInput
           value={todoText}
           onChange={(e) => setTodoText(e.target.value)}
-          placeholder='What do you need to do?'
+          placeholder='What needs to be done?'
         />
-        <CustomButton onClick={handleAddTask}>ADD</CustomButton>
+        <ActionButton onClick={handleAddTask}>ADD</ActionButton>
       </div>
     </>
   )

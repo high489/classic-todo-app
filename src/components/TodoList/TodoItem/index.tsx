@@ -10,7 +10,7 @@ interface TodoItemProps {
 }
 
 const TodoItem: FC<TodoItemProps> = ({ todo }) => {
-  const { toggleTodo } = useTodoStore()
+  const { toggleTodo, deleteTodo } = useTodoStore()
 
   return (
     <>
@@ -22,6 +22,13 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         <span className={`${styles['text']} ${todo.isCompleted ? styles['completed'] : ''}`}>
           {todo.text}
         </span>
+        <span>{todo.isCompleted ? 'completed' : 'active'}</span>
+        <button
+          className={styles['delete-btn']}
+          onClick={() => deleteTodo(todo.id)}
+        >
+          &times;
+        </button>
       </li>
     </>
   )

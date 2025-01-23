@@ -1,7 +1,7 @@
 import styles from './todo-manager.module.scss'
 import { FC } from 'react'
 
-import { TodoFilter, TodoInput, TodoList } from '@components'
+import { TodoControls, TodoInput, TodoList } from '@components'
 
 interface TodoManagerProps {}
 
@@ -11,7 +11,7 @@ const TodoManager: FC<TodoManagerProps> = () => {
       <div className={styles['todo-manager']}>
         <TodoInput />
         <TodoList />
-        <TodoFilter />
+        <TodoControls />
       </div>
     </>
   )
