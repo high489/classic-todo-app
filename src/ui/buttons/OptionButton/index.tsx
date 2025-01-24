@@ -6,15 +6,20 @@ interface OptionButtonProps {
   onClick: () => void;
   disabled?: boolean;
   isActive?: boolean;
+  customStyle?: string;
 }
 
 const OptionButton: FC<OptionButtonProps> = ({
-  children, onClick, disabled = false, isActive = false
+  children, onClick, disabled = false, isActive = false, customStyle
 }) => {
   return (
     <>
       <button
-        className={`${styles['option-button']} ${isActive ? styles['active'] : ''}`}
+        className={`
+          ${styles['option-button']}
+          ${isActive ? styles['active'] : ''}
+          ${customStyle}
+        `}
         onClick={onClick}
         disabled={disabled}
       >

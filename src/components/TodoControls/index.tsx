@@ -1,8 +1,9 @@
 import styles from './todo-controls.module.scss'
 import { FC } from 'react'
 
-import { useTodoStore } from '@src/app/store'
+import { useTodoStore } from '@store'
 import { TodoFilter } from '@components'
+import ClearCompletedIcon from '@assets/icons/clear-completed-icon.svg?react'
 
 interface TodoControlsProps {}
 
@@ -22,7 +23,10 @@ const TodoControls: FC<TodoControlsProps> = () => {
           onClick={() => deleteCompletedTodos()}
           disabled={todos.length === 0}
         >
-          Clear Completed
+          <div className={styles['clear-button-children']}>
+            <ClearCompletedIcon />
+            <span>Clear Completed</span>
+          </div>
         </button>
       </div>
     </>

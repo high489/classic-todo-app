@@ -1,3 +1,17 @@
+.option-button {
+  background-color: transparent;
+  border-width: 0;
+
+  &:disabled {
+    background-color: transparent;
+    color: inherit;
+    opacity: 1;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
 .active {
-  background-color: var(--blue);
+  border-radius: 10px;
+  border: 2px solid var(--orange)
 }

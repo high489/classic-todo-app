@@ -5,16 +5,17 @@ interface ActionButtonProps {
   children: ReactNode;
   onClick: () => void;
   disabled?: boolean;
+  customStyle?: string;
 }
 
 const ActionButton: FC<ActionButtonProps> = ({
-  children, onClick, disabled = false
+  children, onClick, disabled = false, customStyle
 }) => {
 
   return (
     <>
       <button 
-        className={styles['action-button']}
+        className={`${styles['action-button']} ${customStyle}`}
         onClick={onClick}
         disabled={disabled}
       >

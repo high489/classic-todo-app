@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { Todo } from '@models'
 import { useTodoStore } from '@store'
 import { CustomCheckbox } from '@ui'
+import DeleteTodoIcon from '@assets/icons/delete-todo-icon.svg?react'
 
 interface TodoItemProps {
   todo: Todo
@@ -16,18 +17,18 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
     <>
       <li className={styles['todo-item']}>
         <CustomCheckbox
+          customStyle={styles['checkbox']}
           checked={todo.isCompleted}
           onChange={() => toggleTodo(todo.id)}
         />
         <span className={`${styles['text']} ${todo.isCompleted ? styles['completed'] : ''}`}>
           {todo.text}
         </span>
-        <span>{todo.isCompleted ? 'completed' : 'active'}</span>
         <button
           className={styles['delete-btn']}
           onClick={() => deleteTodo(todo.id)}
         >
-          &times;
+          <DeleteTodoIcon />
         </button>
       </li>
     </>

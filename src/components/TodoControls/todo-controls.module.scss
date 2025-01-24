@@ -1,0 +1,27 @@
+.todo-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+}
+
+.items-left {
+  color: var(--orange);
+  //width: 200px;
+}
+
+.clear-button {
+  cursor: pointer;
+  background-color: transparent;
+  border-width: 0;
+  color: var(--orange);
+  padding: 20px 10px;
+  //width: 200px;
+  
+  .clear-button-children {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+}

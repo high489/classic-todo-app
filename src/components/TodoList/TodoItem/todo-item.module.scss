@@ -1,0 +1,37 @@
+.todo-item {
+  width: 100%;
+  height: 88px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin-right: 25px;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--text-color-black);
+  font-weight: 400;
+  font-size: 32px;
+  border-bottom: 1px solid var(--blue);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: var(--text-color-light-gray);
+}
+
+.delete-btn {
+  cursor: pointer;
+  margin-left: auto;
+  background-color: transparent;
+  border-width: 0;
+  opacity: 0.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

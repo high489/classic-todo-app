@@ -5,15 +5,16 @@ interface CustomInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  customStyle?: string;
 }
 
 const CustomInput: FC<CustomInputProps> = ({
-  value, onChange, placeholder
+  value, onChange, placeholder, customStyle
 }) => {
   return (
     <>
       <input
-        className={styles['custom-input']}
+        className={`${styles['custom-input']} ${customStyle}`}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

@@ -13,6 +13,7 @@ const TodoFilter: FC<TodoFilterProps> = () => {
     <>
       <div className={styles['todo-filter']}>
         <OptionButton
+          customStyle={styles['filter-option']}
           onClick={() => setFilterOption('all')}
           disabled={filterOption === 'all'}
           isActive={filterOption === 'all'}
@@ -20,6 +21,7 @@ const TodoFilter: FC<TodoFilterProps> = () => {
           All
         </OptionButton>
         <OptionButton
+          customStyle={styles['filter-option']}
           onClick={() => setFilterOption('active')}
           disabled={filterOption === 'active'}
           isActive={filterOption === 'active'}
@@ -27,6 +29,7 @@ const TodoFilter: FC<TodoFilterProps> = () => {
           Active
         </OptionButton>
         <OptionButton
+          customStyle={styles['filter-option']}
           onClick={() => setFilterOption('completed')}
           disabled={filterOption === 'completed'}
           isActive={filterOption === 'completed'}

@@ -21,11 +21,17 @@ const TodoInput: FC<TodoInputProps> = () => {
     <>
       <div className={styles['todo-input']}>
         <CustomInput
+          customStyle={styles['input-field']}
           value={todoText}
           onChange={(e) => setTodoText(e.target.value)}
           placeholder='What needs to be done?'
         />
-        <ActionButton onClick={handleAddTask}>ADD</ActionButton>
+        <ActionButton
+          customStyle={styles['add-todo-button']}
+          onClick={handleAddTask}
+        >
+          ADD
+        </ActionButton>
       </div>
     </>
   )

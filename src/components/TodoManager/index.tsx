@@ -10,8 +10,10 @@ const TodoManager: FC<TodoManagerProps> = () => {
     <>
       <div className={styles['todo-manager']}>
         <TodoInput />
-        <TodoList />
-        <TodoControls />
+        <div className={styles['todo-list-controls-wrapper']}>
+          <TodoList />
+          <TodoControls />
+        </div>
       </div>
     </>
   )
