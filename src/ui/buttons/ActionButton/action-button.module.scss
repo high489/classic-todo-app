@@ -1,0 +1,10 @@
+.action-button {
+  cursor: pointer;
+  user-select: none;
+  border-width: 0;
+  background-color: var(--blue);
+  color: var(--lighter-orange);
+  font-weight: var(--action-btn-text-weight);
+  font-size: var(--action-btn-text-size);
+  letter-spacing: 2px;
+}

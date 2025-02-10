@@ -6,4 +6,8 @@
 
 .filter-option {
   padding: 10px;
+  font-weight: var(--controls-text-weight);
+  font-size: var(--controls-text-size);
+  line-height: var(--controls-text-line-height);
+  border-color: var(--orange);
 }

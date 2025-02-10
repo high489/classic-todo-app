@@ -1,27 +1,27 @@
 // desktop-first
 
-// base screen size 1440px
+// base screen size: large desktop 1440px 
 .container {
   max-width: 1040px;
   margin: 0 auto;
 }
 
-// screen size 1024px
-@media (max-width: 1024px) {
+// screen size: desktop 1024px
+@media (min-width: 768px) and (max-width: 1023px) {
   .container {
     max-width: 960px;
   }
 }
 
-// screen size 768px
-@media (max-width: 768px) {
+// screen size: tablet 768px
+@media (min-width: 480px) and (max-width: 767px) {
   .container {
     max-width: 720px;
   }
 }
 
-// screen size 480px
-@media (max-width: 480px) {
+// screen size: mobile 480px
+@media (max-width: 479px) {
   .container {
     max-width: 100%;
     padding: 0 15px;

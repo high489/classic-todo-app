@@ -5,18 +5,23 @@
   height: 76px;
 }
 
-.items-left {
+@mixin controls-text {
+  font-weight: var(--controls-text-weight);
+  font-size: var(--controls-text-size);
+  line-height: var(--controls-text-line-height);
   color: var(--orange);
-  //width: 200px;
+}
+
+.items-left {
+  @include controls-text();
 }
 
 .clear-button {
   cursor: pointer;
   background-color: transparent;
   border-width: 0;
-  color: var(--orange);
   padding: 20px 10px;
-  //width: 200px;
+  @include controls-text();
   
   .clear-button-children {
     display: flex;

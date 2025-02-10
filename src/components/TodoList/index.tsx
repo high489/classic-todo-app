@@ -1,8 +1,9 @@
 import styles from './todo-list.module.scss'
-import { FC } from 'react'
+import { FC, RefObject, useEffect, useState } from 'react'
 
+import { useMatchMedia, useScroll } from '@hooks'
 import { useTodoStore } from '@store'
-import { TodoItem } from './TodoItem'
+import { TodoListItem } from './TodoListItem'
 
 interface TodoListProps {}
 
@@ -16,15 +17,44 @@ const TodoList: FC<TodoListProps> = () => {
       default: return todo
     }
   })
+  // screen type
+  const { isMobile } = useMatchMedia()
+  // should have a scrollbar
+  const [hasScrollbar, setHasScrollbar] = useState(false)
+  // should have a scroll
+  const hasScroll = filteredTodos.length > 4
+  const {
+    listRef,
+    scrollbarThumbRef,
+    handleListTouchStart,
+    handleScrollMouseDown,
+    handleScrollTouchStart,
+  } = useScroll(hasScroll)
+  
+  useEffect(() => {
+    if (listRef.current) setHasScrollbar(!isMobile && hasScroll)
+  }, [hasScroll, isMobile])
 
   return (
-    <>
-      <ul className={styles['todo-list']}>
-        {filteredTodos.map(todo => (
-          <TodoItem key={todo.id} todo={todo}/>
-        ))}
-      </ul>
-    </>
+    <div className={styles['todo-list-wrapper']} >
+       <ul
+         className={styles['todo-list']}
+         ref={listRef as RefObject<HTMLUListElement>}
+         onTouchStart={handleListTouchStart}
+       >
+         {filteredTodos.map(todo => (
+           <TodoListItem key={todo.id} todo={todo}/>
+         ))}
+       </ul>
+       <div className={styles['scrollbar']} style={{ opacity: hasScrollbar ? 1 : 0}}>
+          <div
+            className={styles['scrollbar-thumb']}
+            ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
+            onMouseDown={handleScrollMouseDown}
+            onTouchStart={handleScrollTouchStart}
+          ></div>
+        </div>
+     </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import styles from './todo-item.module.scss'
+import styles from './todo-list-item.module.scss'
 import { FC } from 'react'
 
 import { Todo } from '@models'
@@ -6,11 +6,11 @@ import { useTodoStore } from '@store'
 import { CustomCheckbox } from '@ui'
 import DeleteTodoIcon from '@assets/icons/delete-todo-icon.svg?react'
 
-interface TodoItemProps {
+interface TodoListItemProps {
   todo: Todo
 }
 
-const TodoItem: FC<TodoItemProps> = ({ todo }) => {
+const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
   const { toggleTodo, deleteTodo } = useTodoStore()
 
   return (
@@ -21,11 +21,15 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
           checked={todo.isCompleted}
           onChange={() => toggleTodo(todo.id)}
         />
-        <span className={`${styles['text']} ${todo.isCompleted ? styles['completed'] : ''}`}>
-          {todo.text}
-        </span>
+        
+        <div className={styles['text-wrapper']}>
+          <span className={`${styles['text']} ${todo.isCompleted ? styles['completed'] : ''}`}>
+            {todo.text}
+          </span>
+        </div>
+        
         <button
-          className={styles['delete-btn']}
+          className={styles['delete-button']}
           onClick={() => deleteTodo(todo.id)}
         >
           <DeleteTodoIcon />
@@ -35,4 +39,4 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   )
 }
 
-export { TodoItem }
+export { TodoListItem }

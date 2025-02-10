@@ -1,10 +1,10 @@
 .option-button {
   background-color: transparent;
   border-width: 0;
+  color: var(--orange);
 
   &:disabled {
     background-color: transparent;
-    color: inherit;
     opacity: 1;
     cursor: not-allowed;
     pointer-events: none;
@@ -13,5 +13,6 @@
 
 .active {
   border-radius: 10px;
-  border: 2px solid var(--orange)
+  border-width: 3px;
+  border-style: solid;
 }
