@@ -1,10 +1,10 @@
 import { useState, useLayoutEffect } from 'react'
 
 const queries = [
-  '(min-width: 1024px)', // large desktop
-  '(min-width: 768px) and (max-width: 1023px)', // desktop
-  '(min-width: 480px) and (max-width: 767px)', // tablet
-  '(max-width: 479px)', // mobile
+  '(min-width: 1025px)', // large desktop
+  '(min-width: 769px) and (max-width: 1024px)', // desktop
+  '(min-width: 481px) and (max-width: 768px)', // tablet
+  '(max-width: 480px)', // mobile
 ]
 
 interface ScreenMatches {

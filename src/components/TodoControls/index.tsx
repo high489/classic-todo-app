@@ -17,7 +17,7 @@ const TodoControls: FC<TodoControlsProps> = () => {
         <div className={styles['items-left']}>
           {`${itemsLeft} ${itemsLeft === 1 ? 'item' : 'items'} left`}
         </div>
-        <TodoFilter />
+        <TodoFilter/>
         <button
           className={styles['clear-button']}
           onClick={() => deleteCompletedTodos()}

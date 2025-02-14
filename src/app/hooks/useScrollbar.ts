@@ -7,15 +7,34 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
   const [scrollTop, setScrollTop] = useState(0)
 
   const updateScrollThumbPosition = useCallback(() => {
-    if (listRef.current && scrollbarThumbRef.current) {
-      const scrollHeight = listRef.current.scrollHeight - listRef.current.clientHeight
-      const thumbHeight = scrollbarThumbRef.current.clientHeight
-      const maxThumbTop = scrollbarThumbRef.current.parentElement!.clientHeight - thumbHeight
-      let thumbTop = (listRef.current.scrollTop / scrollHeight) * maxThumbTop
-      thumbTop = Math.max(0, Math.min(thumbTop, maxThumbTop))
-      scrollbarThumbRef.current.style.transform = `translateY(${thumbTop}px)`
-    }
+    if (!listRef.current || !scrollbarThumbRef.current) return
+
+    const { scrollTop: listScrollTop, scrollHeight, clientHeight } = listRef.current
+    const thumbHeight = scrollbarThumbRef.current.clientHeight
+    const maxThumbTop = scrollbarThumbRef.current.parentElement!.clientHeight - thumbHeight
+
+    let thumbTop = (listScrollTop / (scrollHeight - clientHeight)) * maxThumbTop
+    thumbTop = Math.max(0, Math.min(thumbTop, maxThumbTop))
+
+    scrollbarThumbRef.current.style.transform = `translateY(${thumbTop}px)`
   }, [listRef])
+
+  const updateScrollbar = useCallback(() => {
+    if (!listRef.current || !scrollbarThumbRef.current) return
+
+    const list = listRef.current
+    const thumb = scrollbarThumbRef.current
+    const visibleRatio = list.clientHeight / list.scrollHeight
+    const thumbHeight = Math.max(visibleRatio * list.clientHeight, 20)
+
+    thumb.style.height = `${thumbHeight}px`
+
+    if (hasScrollbar) {
+      thumb.parentElement!.style.height = `${list.clientHeight}px`
+    }
+
+    updateScrollThumbPosition()
+  }, [listRef, hasScrollbar, updateScrollThumbPosition])
 
   const handleScroll = useCallback(() => {
     updateScrollThumbPosition()
@@ -31,9 +50,11 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging || !listRef.current) return
+
     const deltaY = e.clientY - startY
     const scrollHeight = listRef.current.scrollHeight - listRef.current.clientHeight
     const scrollDelta = (deltaY / scrollbarThumbRef.current!.parentElement!.clientHeight) * scrollHeight
+
     listRef.current.scrollTop = Math.max(0, scrollTop + scrollDelta)
     updateScrollThumbPosition()
   }, [isDragging, startY, scrollTop, listRef, updateScrollThumbPosition])
@@ -42,33 +63,13 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
     setIsDragging(false)
   }, [])
 
-  useEffect(() => {
-    if (listRef.current && scrollbarThumbRef.current) {
-      const visibleRatio = listRef.current.clientHeight / listRef.current.scrollHeight
-      const thumbHeight = Math.max(visibleRatio * listRef.current.clientHeight, 20)
-      scrollbarThumbRef.current.parentElement!.style.height = `${listRef.current.clientHeight}px`
-      scrollbarThumbRef.current.style.height = `${thumbHeight}px`
-      updateScrollThumbPosition()
-    }
-  }, [hasScrollbar, listRef, updateScrollThumbPosition])
-
   useLayoutEffect(() => {
-    if (listRef.current && scrollbarThumbRef.current) {
-      const list = listRef.current
-      const thumb = scrollbarThumbRef.current
-  
-      const visibleRatio = list.clientHeight / list.scrollHeight
-      const thumbHeight = Math.max(visibleRatio * list.clientHeight, 20)
-  
-      thumb.style.height = `${thumbHeight}px`
-  
-      if (hasScrollbar) {
-        thumb.parentElement!.style.height = `${list.clientHeight}px`
-      }
-  
-      updateScrollThumbPosition()
-    }
-  }, [listRef.current?.children.length, hasScrollbar, updateScrollThumbPosition])
+    updateScrollbar()
+  }, [listRef.current?.children.length, hasScrollbar, updateScrollbar])
+
+  useEffect(() => {
+    updateScrollbar()
+  }, [listRef.current?.clientHeight, hasScrollbar, updateScrollbar])
 
   useEffect(() => {
     if (listRef.current) {
@@ -78,6 +79,7 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
     }
+
     return () => {
       if (listRef.current) {
         listRef.current.removeEventListener('scroll', handleScroll)

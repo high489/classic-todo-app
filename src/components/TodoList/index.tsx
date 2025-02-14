@@ -1,5 +1,5 @@
 import styles from './todo-list.module.scss'
-import { FC, RefObject, useRef } from 'react'
+import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useMatchMedia, useScrollbar } from '@hooks'
 import { useTodoStore } from '@store'
@@ -10,36 +10,75 @@ interface TodoListProps {}
 const TodoList: FC<TodoListProps> = () => {
   const { getSortedTodos, filterOption } = useTodoStore()
   const todos = getSortedTodos()
-  const filteredTodos = todos.filter((todo) => {
-    switch (filterOption) {
-      case 'active': return !todo.isCompleted
-      case 'completed': return todo.isCompleted
-      default: return todo
-    }
-  })
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) => {
+      switch (filterOption) {
+        case 'active': return !todo.isCompleted
+        case 'completed': return todo.isCompleted
+        default: return todo
+      }
+    })
+  }, [todos, filterOption])
   // screen type
-  const { isMobile, isTablet } = useMatchMedia()
-  const hasScrollbar = !(isMobile || isTablet) && filteredTodos.length > 4
   const listRef = useRef<HTMLElement>(null)
+  const { isMobile, isTablet, isDesktop, isLargeDesktop } = useMatchMedia()
+  const [ listConfig, setListConfig ] = useState({ visibleTodos: 4, todoHeight: 88 })
+  const { visibleTodos, todoHeight } = listConfig
+
+  useEffect(() => {
+    setListConfig((prev) => {
+      let newConfig = { ...prev }
+      switch (true) {
+        case isMobile:
+          newConfig = { visibleTodos: 5, todoHeight: 55 }
+          break
+        case isTablet:
+          newConfig = { visibleTodos: 5, todoHeight: 72 }
+          break
+        case isDesktop:
+          newConfig = { visibleTodos: 4, todoHeight: 88 }
+          break
+        case isLargeDesktop:
+          newConfig = { visibleTodos: 4, todoHeight: 88 }
+          break
+        default:
+          newConfig = { visibleTodos: 4, todoHeight: 88 }
+      }
+      return prev.visibleTodos === 
+        (newConfig.visibleTodos && prev.todoHeight === newConfig.todoHeight)
+        ? prev
+        : newConfig
+    })
+  }, [isMobile, isTablet, isDesktop, isLargeDesktop])
+
+  const hasScrollbar = !(isMobile || isTablet) && filteredTodos.length * todoHeight > visibleTodos * todoHeight
   const { scrollbarThumbRef, handleScrollMouseDown } = useScrollbar(listRef, hasScrollbar)
 
   return (
-    <div className={styles['todo-list-wrapper']} >
+    <div 
+      className={styles['todo-list-wrapper']}
+      style={{ height: `${visibleTodos * todoHeight}px` }}
+    >
        <ul
          className={styles['todo-list']}
          ref={listRef as RefObject<HTMLUListElement>}
        >
          {filteredTodos.map(todo => (
-           <TodoListItem key={todo.id} todo={todo}/>
+           <TodoListItem 
+            key={todo.id}
+            todo={todo}
+            height={`${todoHeight}px`}
+          />
          ))}
        </ul>
-       <div className={styles['scrollbar']} style={{ opacity: hasScrollbar ? 1 : 0}}>
+       {hasScrollbar && (<div className={styles['scrollbar']}>
           <div
             className={styles['scrollbar-thumb']}
             ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
             onMouseDown={handleScrollMouseDown}
           ></div>
         </div>
+      )} 
      </div>
   )
 }

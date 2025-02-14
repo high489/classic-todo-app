@@ -7,21 +7,21 @@
 }
 
 // screen size: desktop 1024px
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .container {
     max-width: 960px;
   }
 }
 
 // screen size: tablet 768px
-@media (min-width: 480px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 768px) {
   .container {
     max-width: 720px;
   }
 }
 
 // screen size: mobile 480px
-@media (max-width: 479px) {
+@media (max-width: 480px) {
   .container {
     max-width: 100%;
     padding: 0 15px;

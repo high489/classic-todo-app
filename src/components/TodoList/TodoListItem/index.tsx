@@ -8,14 +8,18 @@ import DeleteTodoIcon from '@assets/icons/delete-todo-icon.svg?react'
 
 interface TodoListItemProps {
   todo: Todo
+  height?: string
 }
 
-const TodoListItem: FC<TodoListItemProps> = ({ todo }) => {
+const TodoListItem: FC<TodoListItemProps> = ({ todo, height = '88px' }) => {
   const { toggleTodo, deleteTodo } = useTodoStore()
 
   return (
     <>
-      <li className={styles['todo-item']}>
+      <li
+        className={styles['todo-item']}
+        style={{ height: height}}
+      >
         <CustomCheckbox
           customStyle={styles['checkbox']}
           checked={todo.isCompleted}
