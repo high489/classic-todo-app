@@ -1,28 +1,11 @@
 .todo-controls {
+  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   > * {
-    height: 76px;
-  }
-
-  @media (max-width: 768px) {
-    flex-wrap: wrap-reverse;
-    justify-content: space-evenly;
-
-    > :nth-child(2) {
-      order: 2;
-    }
-  }
-
-  @media (max-width: 480px) {
-    flex-wrap: nowrap;
-    flex-direction: column;
-
-    > :nth-child(2) {
-      order: unset;
-    }
+    height: 78px;
   }
 }
 
@@ -37,6 +20,7 @@
   @include controls-text;
   display: flex;
   align-items: center;
+  padding: 20px 10px;
 }
 
 .clear-button {
@@ -45,11 +29,77 @@
   border: none;
   padding: 20px 10px;
   @include controls-text;
+  display: flex;
+  align-items: center;
 
-  .clear-button-children {
+  > div {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 10px;
+
+    > svg {
+      width: 28px;
+      height: 34px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .todo-controls > * {
+    height: 63px;
+  }
+  .items-left {
+    padding: 16px 8px;
+  }
+  .clear-button {
+    padding: 16px 8px;
+    > div {
+      gap: 8px;
+      > svg {
+        width: 26px;
+        height: 32px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-controls > * {
+    height: 47px;
+  }
+  .items-left {
+    padding: 12px 6px;
+  }
+  .clear-button {
+    padding: 12px 6px;
+    > div {
+      gap: 6px;
+      > svg {
+        width: 22px;
+        height: 28px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-controls {
+    flex-direction: column;
+    > * {
+      height: 39px;
+    }
+  }
+  .items-left {
+    padding: 10px 5px;
+  }
+  .clear-button {
+    padding: 10px 5px;
+    > div {
+      gap: 5px;
+      > svg {
+        width: 20px;
+        height: 26px;
+      }
+    }
   }
 }

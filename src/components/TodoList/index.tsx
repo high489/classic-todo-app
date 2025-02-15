@@ -19,21 +19,21 @@ const TodoList: FC<TodoListProps> = () => {
       }
     })
   }, [todos, filterOption])
-  // screen type
+
   const listRef = useRef<HTMLElement>(null)
   const { isMobile, isTablet, isDesktop, isLargeDesktop } = useMatchMedia()
-  const [ listConfig, setListConfig ] = useState({ visibleTodos: 4, todoHeight: 88 })
-  const { visibleTodos, todoHeight } = listConfig
+  const [ {visibleTodos, todoHeight}, setListConfig ] = useState({visibleTodos: 4, todoHeight: 88})
+  
 
   useEffect(() => {
     setListConfig((prev) => {
       let newConfig = { ...prev }
       switch (true) {
         case isMobile:
-          newConfig = { visibleTodos: 5, todoHeight: 55 }
+          newConfig = { visibleTodos: 6, todoHeight: 55 }
           break
         case isTablet:
-          newConfig = { visibleTodos: 5, todoHeight: 72 }
+          newConfig = { visibleTodos: 6, todoHeight: 72 }
           break
         case isDesktop:
           newConfig = { visibleTodos: 4, todoHeight: 88 }

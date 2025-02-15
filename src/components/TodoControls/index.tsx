@@ -23,7 +23,7 @@ const TodoControls: FC<TodoControlsProps> = () => {
           onClick={() => deleteCompletedTodos()}
           disabled={todos.length === 0}
         >
-          <div className={styles['clear-button-children']}>
+          <div>
             <ClearCompletedIcon />
             <span>Clear Completed</span>
           </div>

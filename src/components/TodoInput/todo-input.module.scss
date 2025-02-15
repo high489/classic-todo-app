@@ -2,7 +2,7 @@
   background-color: var(--light-orange);
   height: 78px;
   width: 100%;
-  border-radius: 50px;
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,6 +14,7 @@
   width: 100%;
   height: 100%;
   padding: 15px 35px;
+  caret-color: var(--text-color-gray);
   color: var(--text-color-black);
   font-weight: var(--todo-text-weight);
   font-size: var(--todo-text-size);
@@ -35,6 +36,51 @@
 .add-todo-button {
   width: 160px;
   height: 100%;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+@media (max-width: 1024px) {
+  .todo-input {
+    height: 63px;
+    border-radius: var(--border-radius);
+  }
+  .input-field {
+    padding: 12px 28px;
+  }
+  .add-todo-button {
+    width: 150px;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-input {
+    height: 47px;
+    border-radius: var(--border-radius);
+  }
+  .input-field {
+    padding: 9px 21px;
+  }
+  .add-todo-button {
+    width: 130px;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-input {
+    height: 39px;
+    border-radius: var(--border-radius);
+  }
+  .input-field {
+    padding: 8px 18px;
+  }
+  .add-todo-button {
+    width: 120px;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
 }

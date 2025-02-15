@@ -1,8 +1,38 @@
 .header {
   background-color: var(--light-orange);
   height: 100px;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  > svg {
+    width: 231px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header{
+    height: 80px;
+    > svg {
+      width: 185px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header{
+    height: 60px;
+    > svg {
+      width: 139px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header{
+    height: 50px;
+    > svg {
+      width: 116px;
+    }
+  }
 }

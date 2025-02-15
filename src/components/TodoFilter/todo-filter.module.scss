@@ -11,3 +11,30 @@
   line-height: var(--controls-text-line-height);
   border-color: var(--orange);
 }
+
+@media (max-width: 1024px) {
+  .todo-filter {
+    gap: 8px;
+  }
+  .filter-option {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .todo-filter {
+    gap: 6px;
+  }
+  .filter-option {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-filter {
+    gap: 5px;
+  }
+  .filter-option {
+    padding: 5px;
+  }
+}
