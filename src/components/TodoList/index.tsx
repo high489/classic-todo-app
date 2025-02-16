@@ -23,7 +23,6 @@ const TodoList: FC<TodoListProps> = () => {
   const listRef = useRef<HTMLElement>(null)
   const { isMobile, isTablet, isDesktop, isLargeDesktop } = useMatchMedia()
   const [ {visibleTodos, todoHeight}, setListConfig ] = useState({visibleTodos: 4, todoHeight: 88})
-  
 
   useEffect(() => {
     setListConfig((prev) => {
@@ -63,7 +62,7 @@ const TodoList: FC<TodoListProps> = () => {
          className={styles['todo-list']}
          ref={listRef as RefObject<HTMLUListElement>}
        >
-         {filteredTodos.map(todo => (
+         {filteredTodos.reverse().map(todo => (
            <TodoListItem 
             key={todo.id}
             todo={todo}

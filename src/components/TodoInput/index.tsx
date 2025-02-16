@@ -17,6 +17,14 @@ const TodoInput: FC<TodoInputProps> = () => {
     }
   }
 
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleAddTask()
+      e.currentTarget.blur()
+    } 
+  }
+
   return (
     <>
       <div className={styles['todo-input']}>
@@ -24,6 +32,7 @@ const TodoInput: FC<TodoInputProps> = () => {
           customStyle={styles['input-field']}
           value={todoText}
           onChange={(e) => setTodoText(e.target.value)}
+          onKeyDown={handleEnterKey}
           placeholder='What needs to be done?'
         />
         <ActionButton
