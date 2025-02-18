@@ -28,7 +28,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo, height = '88px' }) => {
         
         <div className={styles['text-wrapper']}>
           <span className={`${styles['text']} ${todo.isCompleted ? styles['completed'] : ''}`}>
-            {todo.text}
+            <span>{todo.text}</span>
           </span>
         </div>
         

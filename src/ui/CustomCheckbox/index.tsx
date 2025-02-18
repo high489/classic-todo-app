@@ -29,11 +29,7 @@ const CustomCheckbox: FC<CustomCheckboxProps> = ({
           disabled={disabled}
           onChange={onChange}
         />
-        {checked ? (
-          <CompletedIcon />
-        ) : (
-          <ActiveIcon />
-        )}
+        {checked ? (<CompletedIcon />) : (<ActiveIcon />)}
       </label>
     </>
   )
