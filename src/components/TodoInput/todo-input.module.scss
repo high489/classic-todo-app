@@ -34,8 +34,11 @@
 }
 
 .add-todo-button {
-  width: 160px;
   height: 100%;
+  padding: 15px 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }
@@ -49,7 +52,7 @@
     padding: 12px 28px;
   }
   .add-todo-button {
-    width: 150px;
+    padding: 12px 28px;
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
   }
@@ -64,7 +67,7 @@
     padding: 9px 21px;
   }
   .add-todo-button {
-    width: 130px;
+    padding: 9px 21px;
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
   }
@@ -79,7 +82,7 @@
     padding: 8px 18px;
   }
   .add-todo-button {
-    width: 120px;
+    padding: 8px 18px;
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
   }
