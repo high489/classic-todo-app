@@ -14,6 +14,8 @@ const TodoInput: FC<TodoInputProps> = () => {
     if (todoText.trim()) {
       addTodo(todoText)
       setTodoText('')
+    } else {
+      setTodoText('')
     }
   }
 
