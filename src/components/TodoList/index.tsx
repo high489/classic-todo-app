@@ -3,7 +3,7 @@ import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useMatchMedia, useScrollbar } from '@hooks'
 import { useTodoStore } from '@store'
-import { TodoListItem } from './TodoListItem'
+import { TodoListItem } from '@components'
 
 interface TodoListProps {}
 
