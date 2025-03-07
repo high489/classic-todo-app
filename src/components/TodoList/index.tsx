@@ -8,7 +8,7 @@ import { TodoListItem } from '@components'
 interface TodoListProps {}
 
 const TodoList: FC<TodoListProps> = () => {
-  const { getSortedTodos, filterOption } = useTodoStore()
+  const { getSortedTodos, filterOption, toggleTodo, deleteTodo } = useTodoStore()
   const todos = getSortedTodos()
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) => {
@@ -66,6 +66,8 @@ const TodoList: FC<TodoListProps> = () => {
            <TodoListItem 
             key={todo.id}
             todo={todo}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
             height={`${todoHeight}px`}
           />
          ))}

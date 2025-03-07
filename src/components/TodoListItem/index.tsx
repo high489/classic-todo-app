@@ -2,17 +2,19 @@ import styles from './todo-list-item.module.scss'
 import { FC } from 'react'
 
 import { Todo } from '@models'
-import { useTodoStore } from '@store'
 import { CustomCheckbox } from '@ui'
 import DeleteTodoIcon from '@assets/icons/delete-todo-icon.svg?react'
 
 interface TodoListItemProps {
   todo: Todo
+  toggleTodo: (id: string) => void
+  deleteTodo: (id: string) => void
   height?: string
 }
 
-const TodoListItem: FC<TodoListItemProps> = ({ todo, height = '88px' }) => {
-  const { toggleTodo, deleteTodo } = useTodoStore()
+const TodoListItem: FC<TodoListItemProps> = ({
+  todo, toggleTodo, deleteTodo, height = '88px'
+}) => {
 
   return (
     <>
