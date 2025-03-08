@@ -42,6 +42,10 @@
       height: 34px;
     }
   }
+
+  :disabled {
+    cursor: not-allowed;
+  }
 }
 
 @media (max-width: 1024px) {
