@@ -2,7 +2,7 @@ import styles from './todo-filter.module.scss'
 import { FC } from 'react'
 
 import { useTodoStore } from '@store'
-import { OptionButton } from '@src/ui/buttons/OptionButton'
+import { OptionButton } from '@ui'
 
 interface TodoFilterProps {}
 
