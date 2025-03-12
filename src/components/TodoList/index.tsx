@@ -29,10 +29,10 @@ const TodoList: FC<TodoListProps> = () => {
       let newConfig = { ...prev }
       switch (true) {
         case isMobile:
-          newConfig = { visibleTodos: 6, todoHeight: 55 }
+          newConfig = { visibleTodos: 5, todoHeight: 55 }
           break
         case isTablet:
-          newConfig = { visibleTodos: 6, todoHeight: 72 }
+          newConfig = { visibleTodos: 5, todoHeight: 72 }
           break
         case isDesktop:
           newConfig = { visibleTodos: 4, todoHeight: 88 }
@@ -72,16 +72,15 @@ const TodoList: FC<TodoListProps> = () => {
           />
         ))}
       </ul>
-      <div
-        className={styles['scrollbar']}
-        style={{opacity: hasScrollbar ? 1 : 0}}
-      >
-        <div
-          className={styles['scrollbar-thumb']}
-          ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
-          onMouseDown={handleScrollMouseDown}
-        ></div>
-      </div>
+      {hasScrollbar && (
+        <div className={styles['scrollbar']}>
+          <div
+            className={styles['scrollbar-thumb']}
+            ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
+            onMouseDown={handleScrollMouseDown}
+          ></div>
+        </div>
+      )}
     </div>
   )
 }

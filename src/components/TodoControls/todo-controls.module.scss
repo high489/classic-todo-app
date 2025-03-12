@@ -89,6 +89,7 @@
 @media (max-width: 480px) {
   .todo-controls {
     flex-direction: column;
+    gap: 8px;
     > * {
       height: 39px;
     }
