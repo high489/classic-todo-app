@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boolean) => {
+const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boolean = true) => {
   const scrollbarThumbRef = useRef<HTMLElement>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startY, setStartY] = useState(0)
@@ -29,8 +29,10 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
 
     thumb.style.height = `${thumbHeight}px`
 
-    if (hasScrollbar) {
+    if (hasScrollbar && list.scrollHeight > list.clientHeight) {
       thumb.parentElement!.style.height = `${list.clientHeight}px`
+    } else {
+      thumb.parentElement!.style.height = '0px'
     }
 
     updateScrollThumbPosition()
@@ -63,13 +65,36 @@ const useScrollbar = (listRef: React.RefObject<HTMLElement>, hasScrollbar: boole
     setIsDragging(false)
   }, [])
 
+  // initial initialization during mounting
   useLayoutEffect(() => {
     updateScrollbar()
-  }, [listRef.current?.children.length, hasScrollbar, updateScrollbar])
+  }, [listRef, hasScrollbar, updateScrollbar])
 
+  // watching for changes of listRef with MutationObserver
   useEffect(() => {
-    updateScrollbar()
-  }, [listRef.current?.clientHeight, hasScrollbar, updateScrollbar])
+    if (!listRef.current) return
+
+    const observer = new MutationObserver(() => {
+      updateScrollbar()
+    })
+
+    observer.observe(listRef.current, { childList: true, subtree: true })
+
+    return () => observer.disconnect()
+  }, [listRef, updateScrollbar])
+
+  // watching for resizes of listRef
+  useEffect(() => {
+    if (!listRef.current) return
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateScrollbar()
+    })
+
+    resizeObserver.observe(listRef.current)
+
+    return () => resizeObserver.disconnect()
+  }, [listRef, updateScrollbar])
 
   useEffect(() => {
     if (listRef.current) {

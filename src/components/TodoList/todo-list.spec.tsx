@@ -257,23 +257,5 @@ describe('TodoList', () => {
         await waitFor(() => expect(container.querySelector('.scrollbar')).not.toBeInTheDocument())
       }
     )
-
-    // isTablet: true, visibleTodos: 6, todos length: 10, result: scrollbar hidden
-    test('does not display scrollbar when isTablet regardless of todos length',
-      async () => {
-        mockGetSortedTodos.mockReturnValue(generateTodos(10))
-        mockUseTodoStore.mockReturnValue({
-          getSortedTodos: mockGetSortedTodos,
-          filterOption: 'all',
-        })
-        mockMediaConfig(false, true, false, false)
-        mockUseScrollbar.mockReturnValue(defaultScrollbarMock)
-
-        const { container } = renderComponent()
-
-        await waitFor(() => expect(container.querySelector('.scrollbar')).not.toBeInTheDocument())
-      }
-    )
   })
-  
 })

@@ -50,7 +50,7 @@ const TodoList: FC<TodoListProps> = () => {
     })
   }, [isMobile, isTablet, isDesktop, isLargeDesktop])
 
-  const hasScrollbar = !(isMobile || isTablet) && filteredTodos.length * todoHeight > visibleTodos * todoHeight
+  const hasScrollbar = !isMobile && filteredTodos.length * todoHeight > visibleTodos * todoHeight
   const { scrollbarThumbRef, handleScrollMouseDown } = useScrollbar(listRef, hasScrollbar)
 
   return (
