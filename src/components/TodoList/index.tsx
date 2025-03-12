@@ -58,29 +58,31 @@ const TodoList: FC<TodoListProps> = () => {
       className={styles['todo-list-wrapper']}
       style={{ height: `${visibleTodos * todoHeight}px` }}
     >
-       <ul
-         className={styles['todo-list']}
-         ref={listRef as RefObject<HTMLUListElement>}
-       >
-         {filteredTodos.reverse().map(todo => (
-           <TodoListItem 
+      <ul
+        className={styles['todo-list']}
+        ref={listRef as RefObject<HTMLUListElement>}
+      >
+        {filteredTodos.reverse().map(todo => (
+          <TodoListItem 
             key={todo.id}
             todo={todo}
             toggleTodo={toggleTodo}
             deleteTodo={deleteTodo}
             height={`${todoHeight}px`}
           />
-         ))}
-       </ul>
-       {hasScrollbar && (<div className={styles['scrollbar']}>
-          <div
-            className={styles['scrollbar-thumb']}
-            ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
-            onMouseDown={handleScrollMouseDown}
-          ></div>
-        </div>
-      )} 
-     </div>
+        ))}
+      </ul>
+      <div
+        className={styles['scrollbar']}
+        style={{opacity: hasScrollbar ? 1 : 0}}
+      >
+        <div
+          className={styles['scrollbar-thumb']}
+          ref={scrollbarThumbRef as RefObject<HTMLDivElement>}
+          onMouseDown={handleScrollMouseDown}
+        ></div>
+      </div>
+    </div>
   )
 }
 
