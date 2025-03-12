@@ -1,58 +1,10 @@
 import { renderHook, act } from '@testing-library/react'
 import { useMatchMedia } from '.'
-
-// Define an array of queries corresponding to those used in the hook
-const queries = [
-  '(min-width: 1025px)', // large desktop
-  '(min-width: 769px) and (max-width: 1024px)', // desktop
-  '(min-width: 481px) and (max-width: 768px)', // tablet
-  '(max-width: 480px)', // mobile
-]
-
-// Function to create a mock object for matchMedia
-const createMatchMediaMock = (matches: boolean, query: string) => {
-  let listener: ((event: MediaQueryListEvent) => void) | null = null
-
-  return {
-    matches,
-    media: query,
-    onchange: null,
-    addEventListener: jest.fn((event, cb) => {
-      if (event === 'change') listener = cb as (event: MediaQueryListEvent) => void
-    }),
-    removeEventListener: jest.fn((event, cb) => {
-      if (event === 'change' && listener === cb) listener = null
-    }),
-    dispatchEvent: jest.fn(),
-    trigger(newMatches: boolean) {
-      this.matches = newMatches
-      listener?.({ matches: newMatches, media: query } as MediaQueryListEvent)
-    },
-  }
-}
-
-// Helper function to set matchMedia mocks
-const setMatchMediaMocks = (matchesArray: boolean[]) => {
-  const mediaQueryLists: Record<string, ReturnType<typeof createMatchMediaMock>> = {}
-
-  queries.forEach((query, index) => {
-    mediaQueryLists[query] = createMatchMediaMock(matchesArray[index], query)
-  })
-
-  window.matchMedia = jest.fn((query) => mediaQueryLists[query] as unknown as MediaQueryList)
-
-  return mediaQueryLists
-}
-
-// Helper function for expectation
-const expectMediaResult = (result: ReturnType<typeof renderHook>['result'], expected: boolean[]) => {
-  expect(result.current).toEqual({
-    isLargeDesktop: expected[0],
-    isDesktop: expected[1],
-    isTablet: expected[2],
-    isMobile: expected[3],
-  })
-}
+import {
+  queries,
+  setMatchMediaMocks,
+  expectMediaResult,
+} from './test.setup'
 
 describe('useMatchMedia', () => {
   let originalMatchMedia: typeof window.matchMedia
