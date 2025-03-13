@@ -16,6 +16,7 @@ export const createTodoSlice: StateCreator<TodoSlice> = (set, get) => ({
   getSortedTodos: () => {
     return get().todos
                 .sort((a, b) => Number(a.id) - Number(b.id))
+                .reverse()
                 //.sort((a, b) => Number(a.isCompleted) - Number(b.isCompleted))
   },
   addTodo: (text) => {

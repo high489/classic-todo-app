@@ -62,7 +62,7 @@ const TodoList: FC<TodoListProps> = () => {
         className={styles['todo-list']}
         ref={listRef as RefObject<HTMLUListElement>}
       >
-        {filteredTodos.reverse().map(todo => (
+        {filteredTodos.map(todo => (
           <TodoListItem 
             key={todo.id}
             todo={todo}
