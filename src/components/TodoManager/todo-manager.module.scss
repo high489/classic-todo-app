@@ -42,6 +42,7 @@
   .todo-manager {
     gap: 20px;
     margin-top: 20px;
+    flex-direction: column-reverse;
   }
   .todo-list-controls-wrapper {
     border-radius: var(--border-radius);
