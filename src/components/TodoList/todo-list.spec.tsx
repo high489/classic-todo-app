@@ -171,7 +171,7 @@ describe('TodoList', () => {
       const { container } = renderComponent()
   
       expect(container.querySelector('.todo-list-wrapper')).toHaveStyle({
-        height: `${6 * 55}px`, // visibleTodos: 6, todoHeight: 55
+        height: `${5 * 55}px`, // visibleTodos: 5, todoHeight: 55
       })
     })
 
@@ -181,7 +181,7 @@ describe('TodoList', () => {
       const { container } = renderComponent()
   
       expect(container.querySelector('.todo-list-wrapper')).toHaveStyle({
-        height: `${6 * 72}px`, // visibleTodos: 6, todoHeight: 72
+        height: `${5 * 72}px`, // visibleTodos: 5, todoHeight: 72
       })
     })
 
